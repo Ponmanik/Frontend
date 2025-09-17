@@ -1,0 +1,171 @@
+:root {
+  font-family: "Poppins", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: #f4f4f4;
+
+  /* 🔹 Animated gradient background */
+  background: linear-gradient(-45deg, #1e1e2f, #2c2c54, #3a0ca3, #7209b7);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  animation: fadeIn 1s ease-in-out;
+
+  /* Box model */
+  box-sizing: border-box; 
+}
+
+/* Make all elements respect box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Links */
+a {
+  font-weight: 600;
+  color: #00d9ff;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+  color: #ff4ecd;
+  text-shadow: 0 0 8px #ff4ecd;
+}
+
+/* Headings */
+h1 {
+  font-size: 3em;
+  line-height: 1.2;
+  margin: 20px 0;     /* 🔹 Box model */
+  padding: 10px;      /* 🔹 Box model */
+  color: #ffdd59;
+  text-shadow: 0 0 10px rgba(255, 221, 89, 0.8);
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 5px #ffdd59, 0 0 10px #ffdd59; }
+  to { text-shadow: 0 0 15px #ffdd59, 0 0 25px #ffdd59; }
+}
+
+h2, h3 {
+  margin: 15px 0;     /* 🔹 Box model */
+  padding: 5px;
+  color: #00d9ff;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Card - Box model applied */
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 20px;        /* Inner spacing */
+  margin: 20px auto;    /* Outer spacing */
+  width: 90%;
+  max-width: 420px;
+  min-height: 150px;    /* 🔹 Box model */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  backdrop-filter: blur(15px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* Buttons with box model */
+button {
+  border-radius: 10px;
+  border: 2px solid transparent;   /* Box model border */
+  padding: 12px 24px;              /* Inner space */
+  margin: 10px;                    /* Outer space */
+  font-size: 1.05em;
+  font-weight: 600;
+  font-family: inherit;
+  background: linear-gradient(135deg, #ff4ecd, #646cff);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 78, 205, 0.6);
+}
+
+button:hover {
+  transform: scale(1.07);
+  filter: brightness(1.1);
+  box-shadow: 0 0 15px rgba(255, 78, 205, 0.9), 0 0 25px rgba(100, 108, 255, 0.8);
+}
+
+button:active {
+  transform: scale(0.96);
+  border: 2px solid #fff; /* Visible border when pressed */
+}
+
+/* Income / Expense */
+.amount-positive {
+  color: #4cd137;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 5px 0;     /* Box model */
+  text-shadow: 0 0 5px rgba(76, 209, 55, 0.8);
+}
+
+.amount-negative {
+  color: #e84118;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 5px 0;     /* Box model */
+  text-shadow: 0 0 5px rgba(232, 65, 24, 0.8);
+}
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #e7e7ed;
+    background: linear-gradient(-45deg, #f9f9f9, #e0e0e0, #dfe6e9, #b2bec3);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  button {
+    background: linear-gradient(135deg, #00d9ff, #747bff);
+  }
+}
