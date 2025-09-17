@@ -20,7 +20,7 @@ export default function ExpenseTrack() {
     .catch((err) => console.error("Fetch error:",err)); 
   },[])
 
-  const addExpense = (title, amount,id) => {
+  /*const addExpense = (title, amount,id) => {
     if(id){
        //Edit existing
       const updated = expenses.map((exp) =>
@@ -41,8 +41,25 @@ export default function ExpenseTrack() {
         amount: Number(amount),
       },
     ]);*/
+
+  const addExpense = (title, amount, id = null) => {
+    if (id) {
+      axios.put(`http://localhost:3001/api/${id}`, { title, amount: Number(amount) })
+        .then((res) => {
+          const updatedList = expenses.map((exp) =>
+            exp._id === id ? res.data : exp
+          );
+          setExpenses(updatedList);
+          setItemToEdit(null);
+        })
+        .catch((err) => console.error("Update error:", err));
+    } else {
+      axios.post("http://localhost:3001/api/", { title, amount: Number(amount) })
+        .then((res) => setExpenses([...expenses, res.data]))
+        .catch((err) => console.error("Add error:", err));
+    }
   };
-}
+
   const deleteExpense = (id) => {
     axios.delete(`http://localhost:3001/api/${id}`)
     .then(() => setExpenses(expenses.filter((exp)=> exp._id !== id)))
