@@ -15,7 +15,7 @@ export default function ExpenseTrack() {
   const [expenses, setExpenses] = useState(EXPENSES);
   const [itemToEdit,setItemToEdit] = useState(null);
   useEffect(() =>{
-    axios.get("http://localhost:3001/api/getdata")
+    axios.get("https://backendexpense1.onrender.com/api/getdata")
     .then((res) => setExpenses(res.data))
     .catch((err) => console.error("Fetch error:",err)); 
   },[])
@@ -29,7 +29,7 @@ export default function ExpenseTrack() {
       setItemToEdit(null);// Reset edit mode
     }
     else{
-      axios.post("http://localhost:3001/api/postdata",{title,amount:Number(amount)})
+      axios.post("https://backendexpense1.onrender.com/api/postdata",{title,amount:Number(amount)})
       .then((res) => setExpenses([...expenses,res.data]))
       .catch((err) => console.error("Add error:",err));
       
@@ -44,7 +44,7 @@ export default function ExpenseTrack() {
 
   const addExpense = (title, amount, id = null) => {
     if (id) {
-      axios.put(`http://localhost:3001/api/${id}`, { title, amount: Number(amount) })
+      axios.put(`https://backendexpense1.onrender.com/api/${id}`, { title, amount: Number(amount) })
         .then((res) => {
           const updatedList = expenses.map((exp) =>
             exp._id === id ? res.data : exp
@@ -54,14 +54,14 @@ export default function ExpenseTrack() {
         })
         .catch((err) => console.error("Update error:", err));
     } else {
-      axios.post("http://localhost:3001/api/", { title, amount: Number(amount) })
+      axios.post("https://backendexpense1.onrender.com/api/", { title, amount: Number(amount) })
         .then((res) => setExpenses([...expenses, res.data]))
         .catch((err) => console.error("Add error:", err));
     }
   };
 
   const deleteExpense = (id) => {
-    axios.delete(`http://localhost:3001/api/${id}`)
+    axios.delete(`https://backendexpense1.onrender.com/api/${id}`)
     .then(() => setExpenses(expenses.filter((exp)=> exp._id !== id)))
     .catch((err) => console.error("Delete error:",err));
   };
